@@ -1,0 +1,7 @@
+const COL = {p:'#2a7de1',e:'#e0453a',n:'#ffffff'};
+const TC = {};
+const tint = (t,o,r=3)=>{const k=t+o+r;if(TC[k])return TC[k];const im=IM[t];if(!im.complete||!im.naturalWidth)return im;const w=im.naturalWidth,h=im.naturalHeight,p=r+1,c=document.createElement('canvas');c.width=w+2*p;c.height=h+2*p;const g=c.getContext('2d');for(let a=0;a<16;a++)g.drawImage(im,p+Math.cos(a*Math.PI/8)*r,p+Math.sin(a*Math.PI/8)*r);const f=document.createElement('canvas');f.width=w;f.height=h;const q=f.getContext('2d');q.drawImage(im,0,0);q.globalCompositeOperation='source-in';q.fillStyle=COL[o]||COL.p;q.fillRect(0,0,w,h);g.drawImage(f,p,p);return TC[k]=c};
+const spr = (t,o)=>{const k='u'+t+o;if(TC[k])return TC[k];const c=tint(t,o,6);return c instanceof HTMLCanvasElement?(TC[k]=c.toDataURL()):SP[t]};
+const ic = (t,o)=>SP[t]?`<img class=ic src='${spr(t,o||'p')}'>`:U[t].i;
+const cl = (u,o,fl,flip)=>{let a=[];for(const t in U)for(let i=0;i<u[t];i++)a.push(t);const n=a.length;if(!n)return'';const m=a.slice(0,fl?12:15);return `<span class='cl${fl?' fc':' hv'}'>`+m.map((t,i)=>`<img class='ic s' src='${spr(t,o)}' style='${fl?(flip?'transform:scaleX(-1)':''):'animation-delay:'+(i*.17).toFixed(2)+'s'}'>`).join('')+(n>m.length?`<small>+${n-m.length}</small>`:'')+'</span>'};
+const blk = (i,x,y)=>{const b=BK[(i*5+(i>>1))%3];return `<use href='#${b.id}' x='${(x-b.cx).toFixed(1)}' y='${(y-b.cy).toFixed(1)}'/>`};
