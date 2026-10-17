@@ -1,9 +1,15 @@
 function enq(s,k,cell){const r=s.R;if(over||s.Q.length>=6||U[k]&&(!cnt(s,'yar')||s.pop-rs(s)<=U[k].p||used(s.o)+U[k].p>cap(s.o))||!U[k]&&maxed(s,k))return 0;const u=U[k],b=BN[k],c=u?u.c:b[3],t=u?u.t*(s.K.chn?.8:1):b[4];if(!u){if(b[5]==2){if(cell==null)cell=anc(s);if(cell<0||!fp(s,cell))return 0}else{if(cell==null&&k=='pom')cell=s.CR.find(i=>!s.G[i]);if(cell==null)cell=s.G.indexOf(null);if(cell<0||s.G[cell])return 0}}
 if(r.w<c[0]||r.g<c[1])return 0;r.w-=c[0];r.g-=c[1];if(!u){if(b[5]==2){const f=fp(s,cell);s.G[cell]=k;f.slice(1).forEach(j=>s.G[j]='+'+cell)}else s.G[cell]=k}if(!u&&t===0){if(s.o=='p')log(BN[k][0]+' : construction terminée à '+s.n+'.')}else s.Q.push({k,t,cell:u?null:cell});return 1}
 
+function dmb(s,c){const k=s.G[c];if(over||!k||!BN[k]||k=='pal'||s.Q.some(q=>q.cell===c))return null;s.G[c]=null;if(BN[k][5]==2)for(let j=0;j<GN;j++)if(s.G[j]=='+'+c)s.G[j]=null;const r={k,w:Math.floor(BN[k][3][0]*.4),e:Math.floor(BN[k][3][1]*.4)};s.R.w+=r.w;s.R.g+=r.e;return r}
+
+function dmk(s,ex){const b=j=>s.Q.some(q=>q.cell===j),fs=food(s)-s.pop;for(const[k,ok]of[['cha',fs>=3],['car',s.R.w>=100],['pom',cnt(s,'pom')>1||s.R.g>=50],['for',1]]){if(!ok||k==ex)continue;const i=s.G.findIndex((x,j)=>x==k&&!b(j)&&!(k=='pom'&&s.CR.includes(j)));if(i>=0)return i}return-1}
+
 function ai(E){const z=Math.floor(T/180);for(const i of E){const s=I[i];if(s.Q.length>=2)continue;
 const n=k=>s.G.filter(x=>x==k).length,w=[['pom',1],['yar',1],['cas',i<2?1+(z>>1):0],['uni',i<2&&z>=1?1:0],['cha',2+z],['car',(i<2?2:1)+z],['pom',1+(z>>1)],['for',i<2&&z?1:0]],k=(w.find(([k,t])=>n(k)<t)||[])[0];
-if(k&&(enq(s,k)||Math.random()<.6))continue;const ks=Object.keys(SK).find(x=>!s.K[x]&&!s.Q.some(q=>q.k==x)&&(!SK[x][5]||s.K[SK[x][5]]));if(ks&&Math.random()<.25&&sk(s,ks))continue;
+ if(k&&(enq(s,k)||Math.random()<.6))continue;
+ if(k&&(BN[k][5]==2?anc(s)<0:!s.G.includes(null))){const c=dmk(s,k);if(c>=0&&dmb(s,c)){log('🏗️ L’ennemi détruit un bâtiment à '+s.n+' pour s’aufrager.');enq(s,k);continue}}
+ const ks=Object.keys(SK).find(x=>!s.K[x]&&!s.Q.some(q=>q.k==x)&&(!SK[x][5]||s.K[SK[x][5]]));if(ks&&Math.random()<.25&&sk(s,ks))continue;
 if(!(s.u.c||s.Q.some(q=>q.k=='c'))&&!F.some(f=>f.o=='e'&&f.fr==i&&f.u.c)&&T>240&&s.pop-rs(s)>5){enq(s,'c');continue}
 if(s.pop-rs(s)>5)for(const t of Math.random()<.35?['f','z','e','b']:['z','e','b'])if(enq(s,t))break}}
 
