@@ -1,4 +1,4 @@
-I.forEach((s,i)=>{const b=document.createElement('button');b.style.left=s.x+'%';b.style.top=s.y+'%';b.onclick=()=>{sel=i;snd=null;plc=null;cel=null;crb=null;if(I[i].o=='p'){lastOwn=i;view='isl';if(I[i].pp){plc='pal';tab='con'}}else view='map';draw()};$('map').appendChild(b);s.el=b});
+I.forEach((s,i)=>{const b=document.createElement('button');b.style.left=s.x+'%';b.style.top=s.y+'%';b.onclick=()=>{sel=i;snd=null;plc=null;cel=null;crb=null;ub=0;if(I[i].o=='p'){lastOwn=i;view='isl';if(I[i].pp){plc='pal';tab='con'}}else view='map';draw()};$('map').appendChild(b);s.el=b});
 function blob(n){const M=Array(GN).fill(0);M[Math.floor(Math.random()*GN)]=1;let k=1;while(k<n){const o=[];M.forEach((m,i)=>{if(m){const x=i%GW,y=i/GW|0;[[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx,dy])=>{const a=x+dx,b=y+dy;if(a>=0&&a<GW&&b>=0&&b<GH&&!M[b*GW+a])o.push(b*GW+a)})}});M[o[Math.random()*o.length|0]]=1;k++}return M}
 
 function setup(){const d=(a,b)=>Math.hypot(a.x-b.x,(a.y-b.y)*.62),r=(a,b)=>a+Math.random()*(b-a),m=p=>({x:100-p.x,y:98-p.y}),g=()=>({b:2+Math.floor(Math.random()*4),z:Math.floor(Math.random()*3),e:0,f:0,c:0});

@@ -26,6 +26,7 @@ let acc = 0;
 let tp = null;
 let pva = null;
 let crb = null;
+let ub = 0;
 let started = 0;
 let er = 0;
 let ecd = 5;
