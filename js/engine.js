@@ -1,4 +1,4 @@
-function enq(s,k,cell){const r=s.R;if(over||s.Q.length>=6||U[k]&&(!cnt(s,'yar')||s.pop-rs(s)<=U[k].p||used(s.o)+U[k].p>cap(s.o)))return 0;const u=U[k],b=BN[k],c=u?u.c:b[3],t=u?u.t*(s.K.chn?.8:1):b[4];if(!u){if(b[5]==2){if(cell==null)cell=anc(s);if(cell<0||!fp(s,cell))return 0}else{if(cell==null&&k=='pom')cell=s.CR.find(i=>!s.G[i]);if(cell==null)cell=s.G.indexOf(null);if(cell<0||s.G[cell])return 0}}
+function enq(s,k,cell){const r=s.R;if(over||s.Q.length>=6||U[k]&&(!cnt(s,'yar')||s.pop-rs(s)<=U[k].p||used(s.o)+U[k].p>cap(s.o))||!U[k]&&maxed(s,k))return 0;const u=U[k],b=BN[k],c=u?u.c:b[3],t=u?u.t*(s.K.chn?.8:1):b[4];if(!u){if(b[5]==2){if(cell==null)cell=anc(s);if(cell<0||!fp(s,cell))return 0}else{if(cell==null&&k=='pom')cell=s.CR.find(i=>!s.G[i]);if(cell==null)cell=s.G.indexOf(null);if(cell<0||s.G[cell])return 0}}
 if(r.w<c[0]||r.g<c[1])return 0;r.w-=c[0];r.g-=c[1];if(!u){if(b[5]==2){const f=fp(s,cell);s.G[cell]=k;f.slice(1).forEach(j=>s.G[j]='+'+cell)}else s.G[cell]=k}if(!u&&t===0){if(s.o=='p')log(BN[k][0]+' : construction terminée à '+s.n+'.')}else s.Q.push({k,t,cell:u?null:cell});return 1}
 
 function ai(E){const z=Math.floor(T/180);for(const i of E){const s=I[i];if(s.Q.length>=2)continue;
@@ -32,7 +32,7 @@ const clr=c=>{const g=s.G[c];if(!g)return;s.G[c]=null;if(BN[g]&&BN[g][5]==2)for(
 bt.D.filter(x=>x.hp<=0&&x.cat=='p').forEach(x=>clr(x.cell));
 let kf=nf-bt.fs;for(let i=0;i<GN&&kf>0;i++)if(s.G[i]=='for'&&!s.Q.some(q=>q.cell===i)){s.G[i]=null;kf--}
 let kp=np-bt.ps;for(let i=0;i<GN&&kp>0;i++)if(s.G[i]=='pal'){s.G[i]=null;kp--}
-if(cq){const old=s.o;s.o=f.o;s.u=bt.as;s.R={w:60,g:10};s.K={};s.pt=0;s.Q=[];s.pp=0;if(old!='n'){s.G=s.M.map(v=>v?null:'x');s.pop=3}else if(f.o=='p')s.pp=1;else{const c=s.G.indexOf(null);if(c>=0)s.G[c]='pal'}
+if(cq){const old=s.o;s.o=f.o;s.u=bt.as;s.R={w:60,g:10};s.K={};s.pt=0;s.Q=[];s.pp=0;if(old!='n'){s.G=s.M.map(v=>v?null:'x');s.pop=3}if(f.o=='p')s.pp=1;else{const c=s.G.indexOf(null);if(c>=0)s.G[c]='pal'}
 log(me?'Victoire ! '+s.n+' est conquise : vous pouvez y construire.':old=='p'?'⚠️ '+s.n+' est tombée aux mains de l’ennemi !':'L’ennemi occupe '+s.n+'.')}
 else if(bt.dd){const old=s.o;if(old!='n'){s.o='n';s.u={b:0,e:0,z:0,f:0,c:0};s.G=s.M.map(v=>v?null:'x');s.Q=[];s.K={};s.R={w:0,g:0};s.pp=0}else s.u=bt.ds;
 if(bt.aw&&tot(bt.as)){const hm=I[f.fr].o==f.o?f.fr:own(f.o).filter(i=>i!=f.to).sort((a,b)=>Math.hypot(I[a].x-s.x,I[a].y-s.y)-Math.hypot(I[b].x-s.x,I[b].y-s.y))[0];if(hm!=null){const v=Math.min(...Object.keys(U).filter(t=>bt.as[t]).map(t=>U[t].s));F.push({o:f.o,to:hm,fr:f.to,u:{...bt.as},p:0,pa:f.pa||0,dur:Math.hypot(I[hm].x-s.x,(I[hm].y-s.y)*.62)/v})}}

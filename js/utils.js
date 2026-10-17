@@ -9,6 +9,7 @@ const prod = s=>{const e=s.K.eco?1.2:1;return{w:(7*cnt(s,'pal')+4*cnt(s,'car'))*
 const log = m=>{if(m){logs.unshift(m);logs.length=Math.min(logs.length,6)}};
 const can = (c,u)=>I[sel].R.w>=c[0]&&I[sel].R.g>=c[1]&&I[sel].Q.length<6&&(!u||cnt(I[sel],'yar')&&I[sel].pop-rs(I[sel])>U[u].p&&used('p')+U[u].p<=cap('p'))?'':'disabled';
 const cnt = (s,k)=>s.G.filter(x=>x==k).length-s.Q.filter(q=>q.k==k&&q.cell!=null).length;
+const maxed = (s,k)=>(k=='yar'||k=='uni')&&s.G.includes(k);
 const food = s=>3+5*cnt(s,'pal')+2*cnt(s,'cha');
 const dfn = j=>pw(I[j].u,'h')/3*(j<2?1.25:1)+17*cnt(I[j],'for')+33*cnt(I[j],'pal')+(I[j].o=='n'?0:['cha','car','pom','yar','cas','uni'].reduce((a,k)=>a+cnt(I[j],k)*HP[k],0)/3);
 const pf = s=>.5+s.pop/16;
